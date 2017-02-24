@@ -1,6 +1,8 @@
 b2rPHP: PropertyMethodDelegator
 ===============================
 
+[![Build Status](https://travis-ci.org/b2r/php-property-method-delegator.svg?branch=master)](https://travis-ci.org/b2r/php-property-method-delegator)
+
 Delegate method to property instance
 
 - [CHANGELOG](CHANGELOG.md)
