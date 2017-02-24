@@ -1,0 +1,25 @@
+{
+    "name": "b2r/property-method-delegator",
+    "type": "library",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/b2r/php-property-method-delegator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "b2r",
+            "email": "b2r.net@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "b2r/exception": "~0.1"
+    },
+    "autoload": {
+        "psr-4": { "b2r\\Component\\PropertyMethodDelegator\\": "" },
+        "exclude-from-classmap": [
+            "/build/",
+            "/Tests/"
+        ]
+    }
+}
