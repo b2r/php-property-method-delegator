@@ -6,3 +6,7 @@ b2rPHP: PropertyMethodDelegator CHANGELOG
 0.1.0 (2017-02-24)
 ------------------
 - Initial release
+
+0.2.0 (2017-02-28)
+------------------
+- Add PropertyMethodDelegatorInterface
