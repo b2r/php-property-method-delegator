@@ -9,15 +9,22 @@ use b2r\Component\Exception\InvalidMethodException;
 use b2r\Component\PropertyMethodDelegator\Test\ {
     Foo,
     Bar,
+    Baz,
     FooBar,
+    FooBarBaz,
     BarFoo
 };
 
 class PropertyMethodDelegatorTest extends \PHPUnit\Framework\TestCase
 {
-    public function is($expected, $actual)
+    public function is()
     {
-        $this->assertEquals($expected, $actual);
+        $args = func_get_args();
+        if (count($args) === 2) {
+            $this->assertEquals($args[0], $args[1]);
+        } else {
+            $this->assertTrue($args[0]);
+        }
     }
 
     public function testFooBar()
@@ -44,8 +51,16 @@ class PropertyMethodDelegatorTest extends \PHPUnit\Framework\TestCase
         $this->is(Bar::class . '::doBar', $o->doBar());
         $this->is(Bar::class . '::hello', $o->hello());
         $this->is(Bar::class . '::publicHidden', $o->publicHidden());
-
         $this->is(Foo::class . '::doFoo', $o->doFoo());
+    }
+
+    public function testFooBarBaz()
+    {
+        $o = new FooBarBaz();
+        $this->is($o instanceof FooBarBaz);
+        $this->is(Foo::class . '::doFoo', $o->doFoo());
+        $this->is(Bar::class . '::doBar', $o->doBar());
+        $this->is(Baz::class . '::doBaz', $o->doBaz());
     }
 
     /**

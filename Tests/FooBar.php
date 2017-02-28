@@ -2,7 +2,10 @@
 
 namespace b2r\Component\PropertyMethodDelegator\Test;
 
-use b2r\Component\PropertyMethodDelegator\PropertyMethodDelegator;
+use b2r\Component\PropertyMethodDelegator\ {
+    PropertyMethodDelegator,
+    PropertyMethodDelegatorInterface
+};
 
 class Foo
 {
@@ -68,7 +71,15 @@ class Bar
     }
 }
 
-class FooBar
+class Baz
+{
+    public function doBaz()
+    {
+        return __METHOD__;
+    }
+}
+
+class FooBar implements PropertyMethodDelegatorInterface
 {
     use PropertyMethodDelegator;
 
@@ -95,10 +106,29 @@ class FooBar
     }
 }
 
-class BarFoo extends FooBar
+class BarFoo extends FooBar implements PropertyMethodDelegatorInterface
 {
     protected static $propertyMethodDelegator = [
         'bar' => [],
         'foo' => [],
     ];
+}
+
+class FooBarBaz implements PropertyMethodDelegatorInterface
+{
+    use PropertyMethodDelegator;
+
+    protected static $propertyMethodDelegator = [
+        'foobar' => [],
+        'baz' => [],
+    ];
+
+    protected $foobar;
+    protected $baz;
+
+    public function __construct()
+    {
+        $this->foobar = new FooBar();
+        $this->baz = new Baz();
+    }
 }
