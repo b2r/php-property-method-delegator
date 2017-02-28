@@ -60,7 +60,7 @@ trait PropertyMethodDelegator
      * @param  string $name Method name
      * @return array|false [object $instance, string $method] or false
      */
-    public function resolveDelegateMethod($name)
+    public function resolveDelegateMethod(string $name)
     {
         $key = strtolower($name);
         $defs = static::$propertyMethodDelegator;
@@ -84,7 +84,12 @@ trait PropertyMethodDelegator
                 continue;
             }
             $instance = $this->$prop;
-            if (method_exists($instance, $name) && (new ReflectionMethod($instance, $name))->isPublic()) {
+            if ($instance instanceof PropertyMethodDelegatorInterface) {
+                $method = $instance->resolveDelegateMethod($name);
+                if ($method) {
+                    return $method;
+                }
+            } elseif (method_exists($instance, $name) && (new ReflectionMethod($instance, $name))->isPublic()) {
                 static::$propertyMethodDelegator[$prop][$key] = $name;
                 return [$instance, $name];
             }
