@@ -6,6 +6,7 @@ b2rPHP: PropertyMethodDelegator
 Delegate method to property instance
 
 - [CHANGELOG](CHANGELOG.md)
+- [Packagist](https://packagist.org/packages/b2r/property-method-delegator)
 
 ## Features
 - Delegate methods to target property

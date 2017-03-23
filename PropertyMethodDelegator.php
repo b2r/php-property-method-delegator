@@ -84,17 +84,17 @@ trait PropertyMethodDelegator
                 continue;
             }
             $instance = $this->$prop;
+            if (method_exists($instance, $name) && (new ReflectionMethod($instance, $name))->isPublic()) {
+                static::$propertyMethodDelegator[$prop][$key] = $name;
+                return [$instance, $name];
+            }
             if ($instance instanceof PropertyMethodDelegatorInterface) {
                 $method = $instance->resolveDelegateMethod($name);
                 if ($method) {
                     return $method;
                 }
-            } elseif (method_exists($instance, $name) && (new ReflectionMethod($instance, $name))->isPublic()) {
-                static::$propertyMethodDelegator[$prop][$key] = $name;
-                return [$instance, $name];
-            }
+            } 
         }
-
         return false;
     }
 
